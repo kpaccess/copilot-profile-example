@@ -8,11 +8,31 @@ import Box from "@mui/material/Box";
 import { getSkills } from "../lib/contentful";
 
 export default function Home({ skills }) {
+  // Debug: log skills prop to browser console
+  React.useEffect(() => {
+    // Only runs client-side
+    console.log("Skills prop:", skills);
+  }, [skills]);
+
+  // SSR blank page protection: fallback UI
+  if (!skills || !Array.isArray(skills) || skills.length === 0) {
+    return (
+      <Container maxWidth="lg">
+        <Header />
+        <Hero />
+        <Box sx={{ mt: 6 }}>
+          <Typography color="error" variant="h6">
+            No skills found. Please check your Contentful data or configuration.
+          </Typography>
+        </Box>
+      </Container>
+    );
+  }
+
   return (
     <Container maxWidth="lg">
       <Header />
       <Hero />
-
       <Box
         sx={{
           display: "flex",
@@ -54,12 +74,17 @@ export async function getStaticProps() {
 
   try {
     const items = await getSkills();
-    // If no skills from CMS, use defaults
-    if (items.length === 0) {
+    // Defensive: ensure items is an array
+    if (!Array.isArray(items) || items.length === 0) {
       return { props: { skills: DEFAULT_SKILLS }, revalidate: 60 };
     }
-    // Map to keep payload small
-    const skills = items.map((it) => ({ sys: it.sys, fields: it.fields }));
+    // Defensive: filter out invalid entries
+    const skills = items
+      .filter((it) => it && typeof it === "object" && it.fields)
+      .map((it) => ({ sys: it.sys, fields: it.fields }));
+    if (skills.length === 0) {
+      return { props: { skills: DEFAULT_SKILLS }, revalidate: 60 };
+    }
     return { props: { skills }, revalidate: 60 };
   } catch (err) {
     console.error("Error fetching skills", err);
