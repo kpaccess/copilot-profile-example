@@ -1,0 +1,31 @@
+[00:00:01.441] Server  LOG      ✓ Ready in 839ms
+[00:00:03.399] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Inter:wght@400;600&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
+[00:00:03.422] Server  ERROR   `legacyBehavior` is deprecated and will be removed in a future release. A codemod is available to upgrade your components:
+
+npx @next/codemod@latest new-link .
+
+Learn more: https://nextjs.org/docs/app/building-your-application/upgrading/codemods#remove-a-tags-from-link-components
+[00:00:03.454] Server  WARN    MUI Grid: The `item` prop has been removed and is no longer necessary. You can safely remove it.
+
+[00:00:03.455] Server  WARN    MUI Grid: The `xs` prop has been removed. See https://mui.com/material-ui/migration/upgrade-to-grid-v2/ for migration instructions.
+
+[00:00:03.455] Server  WARN    MUI Grid: The `sm` prop has been removed. See https://mui.com/material-ui/migration/upgrade-to-grid-v2/ for migration instructions.
+
+[00:00:03.455] Server  WARN    MUI Grid: The `md` prop has been removed. See https://mui.com/material-ui/migration/upgrade-to-grid-v2/ for migration instructions.
+
+[00:00:25.255] Browser ERROR   `legacyBehavior` is deprecated and will be removed in a future release. A codemod is available to upgrade your components:
+
+npx @next/codemod@latest new-link .
+
+Learn more: https://nextjs.org/docs/app/building-your-application/upgrading/codemods#remove-a-tags-from-link-components
+[00:00:25.255] Browser WARN    MUI Grid: The `item` prop has been removed and is no longer necessary. You can safely remove it.
+
+[00:00:25.256] Browser WARN    MUI Grid: The `xs` prop has been removed. See https://mui.com/material-ui/migration/upgrade-to-grid-v2/ for migration instructions.
+
+[00:00:25.256] Browser WARN    MUI Grid: The `sm` prop has been removed. See https://mui.com/material-ui/migration/upgrade-to-grid-v2/ for migration instructions.
+
+[00:00:25.256] Browser WARN    MUI Grid: The `md` prop has been removed. See https://mui.com/material-ui/migration/upgrade-to-grid-v2/ for migration instructions.
+
+[00:00:25.256] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Inter:wght@400;600&display=swap"). Use Document instead. 
+See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
