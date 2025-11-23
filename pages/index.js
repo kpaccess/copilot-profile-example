@@ -39,13 +39,30 @@ export default function Home({ skills }) {
 }
 
 export async function getStaticProps() {
+  const DEFAULT_SKILLS = [
+    "HTML - 8",
+    "CSS - 8",
+    "JavaScript - 8",
+    "ReactJS - 8",
+    "NextJS - 8",
+    "TypeScript - 8",
+    "Redux - 8",
+    "GraphQL - 7",
+    "Docker - 6",
+    "NODEJS - 5",
+  ];
+
   try {
     const items = await getSkills();
+    // If no skills from CMS, use defaults
+    if (items.length === 0) {
+      return { props: { skills: DEFAULT_SKILLS }, revalidate: 60 };
+    }
     // Map to keep payload small
     const skills = items.map((it) => ({ sys: it.sys, fields: it.fields }));
     return { props: { skills }, revalidate: 60 };
   } catch (err) {
     console.error("Error fetching skills", err);
-    return { props: { skills: [] } };
+    return { props: { skills: DEFAULT_SKILLS } };
   }
 }

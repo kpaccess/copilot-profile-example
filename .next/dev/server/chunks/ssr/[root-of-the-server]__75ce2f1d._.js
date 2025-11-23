@@ -430,26 +430,37 @@ var __turbopack_async_dependencies__ = __turbopack_handle_async_dependencies__([
 const space = process.env.CONTENTFUL_SPACE_ID;
 const accessToken = process.env.CONTENTFUL_DELIVERY_TOKEN;
 if (!space || !accessToken) {
-    // This will be visible during build/runtime if env missing.
     console.warn("CONTENTFUL_SPACE_ID and CONTENTFUL_DELIVERY_TOKEN must be set. See .env.local.example");
 }
-const client = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$contentful__$5b$external$5d$__$28$contentful$2c$__esm_import$29$__["createClient"])({
+const client = space && accessToken ? (0, __TURBOPACK__imported__module__$5b$externals$5d2f$contentful__$5b$external$5d$__$28$contentful$2c$__esm_import$29$__["createClient"])({
     space,
     accessToken
-});
+}) : null;
 async function getProjects() {
-    const res = await client.getEntries({
-        content_type: "project",
-        order: "-fields.createdAt"
-    });
-    return res.items || [];
+    if (!client) return [];
+    try {
+        const res = await client.getEntries({
+            content_type: "project",
+            order: "-fields.createdAt"
+        });
+        return res.items || [];
+    } catch (err) {
+        console.error("Error fetching projects:", err.message);
+        return [];
+    }
 }
 async function getSkills() {
-    const res = await client.getEntries({
-        content_type: "skill",
-        order: "-fields.rating"
-    });
-    return res.items || [];
+    if (!client) return [];
+    try {
+        const res = await client.getEntries({
+            content_type: "skill",
+            order: "-fields.rating"
+        });
+        return res.items || [];
+    } catch (err) {
+        console.error("Error fetching skills:", err.message);
+        return [];
+    }
 }
 __turbopack_async_result__();
 } catch(e) { __turbopack_async_result__(e); } }, false);}),
@@ -566,8 +577,29 @@ function Home({ skills }) {
     }, this);
 }
 async function getStaticProps() {
+    const DEFAULT_SKILLS = [
+        "HTML - 8",
+        "CSS - 8",
+        "JavaScript - 8",
+        "ReactJS - 8",
+        "NextJS - 8",
+        "TypeScript - 8",
+        "Redux - 8",
+        "GraphQL - 7",
+        "Docker - 6",
+        "NODEJS - 5"
+    ];
     try {
         const items = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$contentful$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["getSkills"])();
+        // If no skills from CMS, use defaults
+        if (items.length === 0) {
+            return {
+                props: {
+                    skills: DEFAULT_SKILLS
+                },
+                revalidate: 60
+            };
+        }
         // Map to keep payload small
         const skills = items.map((it)=>({
                 sys: it.sys,
@@ -583,7 +615,7 @@ async function getStaticProps() {
         console.error("Error fetching skills", err);
         return {
             props: {
-                skills: []
+                skills: DEFAULT_SKILLS
             }
         };
     }
