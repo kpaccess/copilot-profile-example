@@ -623,7 +623,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$
 ;
 ;
 function Hero() {
-    const profileUrl = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80&auto=format&fit=crop";
+    const profileUrl = "/krishna.jpg";
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$react$40$19$2e$1$2e$0$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$mui$2b$material$40$7$2e$3$2e$5_$40$emotion$2b$react$40$11$2e$14$2e$0_$40$types$2b$react$40$18$2e$3$2e$27_react$40$19$2e$1$2e$0_$5f40$emotion$2b$styled_exfc7eucjbfe7sy7vftklwa4n4$2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Box$2f$Box$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
         sx: {
             display: 'flex',
@@ -758,10 +758,19 @@ const DEFAULT_SKILLS = [
     "NODEJS - 5"
 ];
 function parseSkill(s) {
-    const parts = s.split("-").map((p)=>p.trim());
+    // Handle both string format ("Name - 8") and Contentful object format
+    if (typeof s === "string") {
+        const parts = s.split("-").map((p)=>p.trim());
+        return {
+            name: parts[0],
+            rating: Math.min(10, Math.max(0, Number(parts[1] || 0)))
+        };
+    }
+    // Contentful object with fields.name and fields.rating
+    const fields = s.fields || {};
     return {
-        name: parts[0],
-        rating: Math.min(10, Math.max(0, Number(parts[1] || 0)))
+        name: fields.name || "Unknown",
+        rating: Math.min(10, Math.max(0, Number(fields.rating || 0)))
     };
 }
 function Skills({ items = DEFAULT_SKILLS }) {
@@ -781,7 +790,7 @@ function Skills({ items = DEFAULT_SKILLS }) {
                 children: "Skills"
             }, void 0, false, {
                 fileName: "[project]/components/Skills.js",
-                lineNumber: 31,
+                lineNumber: 43,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$react$40$19$2e$1$2e$0$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$mui$2b$material$40$7$2e$3$2e$5_$40$emotion$2b$react$40$11$2e$14$2e$0_$40$types$2b$react$40$18$2e$3$2e$27_react$40$19$2e$1$2e$0_$5f40$emotion$2b$styled_exfc7eucjbfe7sy7vftklwa4n4$2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Grid$2f$Grid$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
@@ -796,8 +805,8 @@ function Skills({ items = DEFAULT_SKILLS }) {
                             elevation: 0,
                             sx: {
                                 p: 2,
-                                bgcolor: 'background.paper',
-                                border: '1px solid rgba(0,0,0,0.04)'
+                                bgcolor: "background.paper",
+                                border: "1px solid rgba(0,0,0,0.04)"
                             },
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$react$40$19$2e$1$2e$0$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$mui$2b$material$40$7$2e$3$2e$5_$40$emotion$2b$react$40$11$2e$14$2e$0_$40$types$2b$react$40$18$2e$3$2e$27_react$40$19$2e$1$2e$0_$5f40$emotion$2b$styled_exfc7eucjbfe7sy7vftklwa4n4$2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Typography$2f$Typography$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
@@ -808,7 +817,7 @@ function Skills({ items = DEFAULT_SKILLS }) {
                                     children: s.name
                                 }, void 0, false, {
                                     fileName: "[project]/components/Skills.js",
-                                    lineNumber: 38,
+                                    lineNumber: 57,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$react$40$19$2e$1$2e$0$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$mui$2b$material$40$7$2e$3$2e$5_$40$emotion$2b$react$40$11$2e$14$2e$0_$40$types$2b$react$40$18$2e$3$2e$27_react$40$19$2e$1$2e$0_$5f40$emotion$2b$styled_exfc7eucjbfe7sy7vftklwa4n4$2f$node_modules$2f40$mui$2f$material$2f$esm$2f$LinearProgress$2f$LinearProgress$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
@@ -820,29 +829,29 @@ function Skills({ items = DEFAULT_SKILLS }) {
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/components/Skills.js",
-                                    lineNumber: 39,
+                                    lineNumber: 58,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/Skills.js",
-                            lineNumber: 37,
+                            lineNumber: 49,
                             columnNumber: 13
                         }, this)
                     }, i, false, {
                         fileName: "[project]/components/Skills.js",
-                        lineNumber: 36,
+                        lineNumber: 48,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/components/Skills.js",
-                lineNumber: 34,
+                lineNumber: 46,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/Skills.js",
-        lineNumber: 30,
+        lineNumber: 42,
         columnNumber: 5
     }, this);
 }
@@ -857,6 +866,8 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 "use strict";
 
 __turbopack_context__.s([
+    "__N_SSG",
+    ()=>__N_SSG,
     "default",
     ()=>Home
 ]);
@@ -876,80 +887,83 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$
 ;
 ;
 ;
-function Home() {
+var __N_SSG = true;
+function Home({ skills }) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$react$40$19$2e$1$2e$0$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$mui$2b$material$40$7$2e$3$2e$5_$40$emotion$2b$react$40$11$2e$14$2e$0_$40$types$2b$react$40$18$2e$3$2e$27_react$40$19$2e$1$2e$0_$5f40$emotion$2b$styled_exfc7eucjbfe7sy7vftklwa4n4$2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Container$2f$Container$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
         maxWidth: "lg",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$react$40$19$2e$1$2e$0$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Header$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/pages/index.js",
-                lineNumber: 12,
+                lineNumber: 13,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$react$40$19$2e$1$2e$0$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Hero$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/pages/index.js",
-                lineNumber: 13,
+                lineNumber: 14,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$react$40$19$2e$1$2e$0$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$mui$2b$material$40$7$2e$3$2e$5_$40$emotion$2b$react$40$11$2e$14$2e$0_$40$types$2b$react$40$18$2e$3$2e$27_react$40$19$2e$1$2e$0_$5f40$emotion$2b$styled_exfc7eucjbfe7sy7vftklwa4n4$2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Box$2f$Box$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
                 sx: {
-                    display: 'flex',
+                    display: "flex",
                     gap: 6,
-                    alignItems: 'flex-start',
+                    alignItems: "flex-start",
                     mt: 2,
-                    flexWrap: 'wrap'
+                    flexWrap: "wrap"
                 },
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$react$40$19$2e$1$2e$0$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$mui$2b$material$40$7$2e$3$2e$5_$40$emotion$2b$react$40$11$2e$14$2e$0_$40$types$2b$react$40$18$2e$3$2e$27_react$40$19$2e$1$2e$0_$5f40$emotion$2b$styled_exfc7eucjbfe7sy7vftklwa4n4$2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Box$2f$Box$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
                         sx: {
-                            flex: '1 1 420px',
+                            flex: "1 1 420px",
                             minWidth: 320
                         },
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$react$40$19$2e$1$2e$0$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$mui$2b$material$40$7$2e$3$2e$5_$40$emotion$2b$react$40$11$2e$14$2e$0_$40$types$2b$react$40$18$2e$3$2e$27_react$40$19$2e$1$2e$0_$5f40$emotion$2b$styled_exfc7eucjbfe7sy7vftklwa4n4$2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Typography$2f$Typography$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
                                 sx: {
-                                    color: 'text.secondary',
+                                    color: "text.secondary",
                                     mb: 4
                                 },
                                 children: "Dedicated to crafting beautiful and functional websites that make ideas come alive through code. Explore my portfolio to see my passion for web development in action."
                             }, void 0, false, {
                                 fileName: "[project]/pages/index.js",
-                                lineNumber: 17,
+                                lineNumber: 26,
                                 columnNumber: 11
                             }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$react$40$19$2e$1$2e$0$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Skills$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$react$40$19$2e$1$2e$0$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Skills$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
+                                items: skills
+                            }, void 0, false, {
                                 fileName: "[project]/pages/index.js",
-                                lineNumber: 20,
+                                lineNumber: 31,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/pages/index.js",
-                        lineNumber: 16,
+                        lineNumber: 25,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$react$40$19$2e$1$2e$0$2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$mui$2b$material$40$7$2e$3$2e$5_$40$emotion$2b$react$40$11$2e$14$2e$0_$40$types$2b$react$40$18$2e$3$2e$27_react$40$19$2e$1$2e$0_$5f40$emotion$2b$styled_exfc7eucjbfe7sy7vftklwa4n4$2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Box$2f$Box$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
                         sx: {
-                            flex: '0 0 320px',
+                            flex: "0 0 320px",
                             display: {
-                                xs: 'none',
-                                md: 'block'
+                                xs: "none",
+                                md: "block"
                             }
                         }
                     }, void 0, false, {
                         fileName: "[project]/pages/index.js",
-                        lineNumber: 22,
+                        lineNumber: 33,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/pages/index.js",
-                lineNumber: 15,
+                lineNumber: 16,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/pages/index.js",
-        lineNumber: 11,
+        lineNumber: 12,
         columnNumber: 5
     }, this);
 }

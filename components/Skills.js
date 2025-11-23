@@ -19,10 +19,19 @@ const DEFAULT_SKILLS = [
 ];
 
 function parseSkill(s) {
-  const parts = s.split("-").map((p) => p.trim());
+  // Handle both string format ("Name - 8") and Contentful object format
+  if (typeof s === "string") {
+    const parts = s.split("-").map((p) => p.trim());
+    return {
+      name: parts[0],
+      rating: Math.min(10, Math.max(0, Number(parts[1] || 0))),
+    };
+  }
+  // Contentful object with fields.name and fields.rating
+  const fields = s.fields || {};
   return {
-    name: parts[0],
-    rating: Math.min(10, Math.max(0, Number(parts[1] || 0))),
+    name: fields.name || "Unknown",
+    rating: Math.min(10, Math.max(0, Number(fields.rating || 0))),
   };
 }
 

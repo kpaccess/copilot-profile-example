@@ -5,8 +5,9 @@ import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Skills from "../components/Skills";
 import Box from "@mui/material/Box";
+import { getSkills } from "../lib/contentful";
 
-export default function Home() {
+export default function Home({ skills }) {
   return (
     <Container maxWidth="lg">
       <Header />
@@ -27,7 +28,7 @@ export default function Home() {
             ideas come alive through code. Explore my portfolio to see my
             passion for web development in action.
           </Typography>
-          <Skills />
+          <Skills items={skills} />
         </Box>
         <Box sx={{ flex: "0 0 320px", display: { xs: "none", md: "block" } }}>
           {/* Placeholder for future side content (projects highlight, contact callout) */}
@@ -35,4 +36,16 @@ export default function Home() {
       </Box>
     </Container>
   );
+}
+
+export async function getStaticProps() {
+  try {
+    const items = await getSkills();
+    // Map to keep payload small
+    const skills = items.map((it) => ({ sys: it.sys, fields: it.fields }));
+    return { props: { skills }, revalidate: 60 };
+  } catch (err) {
+    console.error("Error fetching skills", err);
+    return { props: { skills: [] } };
+  }
 }

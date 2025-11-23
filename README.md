@@ -25,7 +25,10 @@ npm install
   - `link` (Short text) — optional URL to the project
   - `image` (Media) — optional
   - `createdAt` (Date) — optional
-- Add one or more entries of type `project` and publish them.
+- Add a Content Model named `skill` with these fields:
+  - `name` (Short text) — skill name (e.g., "React", "TypeScript")
+  - `rating` (Integer) — skill rating 1-10
+- Add one or more entries of type `project` and `skill` and publish them.
 
 3. Copy `.env.local.example` to `.env.local` and fill in your credentials
 
@@ -46,6 +49,7 @@ Notes
 
 - The CMS integration uses the Contentful Delivery API. The free tier is sufficient for demo sites.
 - Projects page uses `getStaticProps` and will revalidate every 60s. If you make changes in Contentful, publish them and the site will show updates after revalidation or on rebuild.
+- Skills are now fetched from Contentful. You can edit skill names and ratings directly in the CMS and they'll update on the site after revalidation.
 
 Want me to: add image uploads, add richer project fields, or switch to Sanity/Tina/Git-based CMS? Reply which option you prefer.
 

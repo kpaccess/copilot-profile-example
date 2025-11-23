@@ -398,12 +398,71 @@ function Skills({ items = DEFAULT_SKILLS }) {
     }, this);
 }
 }),
+"[externals]/contentful [external] (contentful, esm_import)", ((__turbopack_context__) => {
+"use strict";
+
+return __turbopack_context__.a(async (__turbopack_handle_async_dependencies__, __turbopack_async_result__) => { try {
+
+const mod = await __turbopack_context__.y("contentful");
+
+__turbopack_context__.n(mod);
+__turbopack_async_result__();
+} catch(e) { __turbopack_async_result__(e); } }, true);}),
+"[project]/lib/contentful.js [ssr] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+return __turbopack_context__.a(async (__turbopack_handle_async_dependencies__, __turbopack_async_result__) => { try {
+
+__turbopack_context__.s([
+    "client",
+    ()=>client,
+    "getProjects",
+    ()=>getProjects,
+    "getSkills",
+    ()=>getSkills
+]);
+var __TURBOPACK__imported__module__$5b$externals$5d2f$contentful__$5b$external$5d$__$28$contentful$2c$__esm_import$29$__ = __turbopack_context__.i("[externals]/contentful [external] (contentful, esm_import)");
+var __turbopack_async_dependencies__ = __turbopack_handle_async_dependencies__([
+    __TURBOPACK__imported__module__$5b$externals$5d2f$contentful__$5b$external$5d$__$28$contentful$2c$__esm_import$29$__
+]);
+[__TURBOPACK__imported__module__$5b$externals$5d2f$contentful__$5b$external$5d$__$28$contentful$2c$__esm_import$29$__] = __turbopack_async_dependencies__.then ? (await __turbopack_async_dependencies__)() : __turbopack_async_dependencies__;
+;
+const space = process.env.CONTENTFUL_SPACE_ID;
+const accessToken = process.env.CONTENTFUL_DELIVERY_TOKEN;
+if (!space || !accessToken) {
+    // This will be visible during build/runtime if env missing.
+    console.warn("CONTENTFUL_SPACE_ID and CONTENTFUL_DELIVERY_TOKEN must be set. See .env.local.example");
+}
+const client = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$contentful__$5b$external$5d$__$28$contentful$2c$__esm_import$29$__["createClient"])({
+    space,
+    accessToken
+});
+async function getProjects() {
+    const res = await client.getEntries({
+        content_type: "project",
+        order: "-fields.createdAt"
+    });
+    return res.items || [];
+}
+async function getSkills() {
+    const res = await client.getEntries({
+        content_type: "skill",
+        order: "-fields.rating"
+    });
+    return res.items || [];
+}
+__turbopack_async_result__();
+} catch(e) { __turbopack_async_result__(e); } }, false);}),
 "[project]/pages/index.js [ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
+return __turbopack_context__.a(async (__turbopack_handle_async_dependencies__, __turbopack_async_result__) => { try {
+
 __turbopack_context__.s([
     "default",
-    ()=>Home
+    ()=>Home,
+    "getStaticProps",
+    ()=>getStaticProps
 ]);
 var __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/react/jsx-dev-runtime [external] (react/jsx-dev-runtime, cjs)");
 var __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/react [external] (react, cjs)");
@@ -413,6 +472,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Header$2e$js__
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Hero$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/Hero.js [ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Skills$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/Skills.js [ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$mui$2b$material$40$7$2e$3$2e$5_$40$emotion$2b$react$40$11$2e$14$2e$0_$40$types$2b$react$40$18$2e$3$2e$27_react$40$19$2e$1$2e$0_$5f40$emotion$2b$styled_exfc7eucjbfe7sy7vftklwa4n4$2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Box$2f$Box$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/@mui+material@7.3.5_@emotion+react@11.14.0_@types+react@18.3.27_react@19.1.0__@emotion+styled_exfc7eucjbfe7sy7vftklwa4n4/node_modules/@mui/material/esm/Box/Box.js [ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$contentful$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/contentful.js [ssr] (ecmascript)");
+var __turbopack_async_dependencies__ = __turbopack_handle_async_dependencies__([
+    __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$contentful$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__
+]);
+[__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$contentful$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__] = __turbopack_async_dependencies__.then ? (await __turbopack_async_dependencies__)() : __turbopack_async_dependencies__;
 ;
 ;
 ;
@@ -421,18 +485,19 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$
 ;
 ;
 ;
-function Home() {
+;
+function Home({ skills }) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$mui$2b$material$40$7$2e$3$2e$5_$40$emotion$2b$react$40$11$2e$14$2e$0_$40$types$2b$react$40$18$2e$3$2e$27_react$40$19$2e$1$2e$0_$5f40$emotion$2b$styled_exfc7eucjbfe7sy7vftklwa4n4$2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Container$2f$Container$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
         maxWidth: "lg",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Header$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/pages/index.js",
-                lineNumber: 12,
+                lineNumber: 13,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Hero$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/pages/index.js",
-                lineNumber: 13,
+                lineNumber: 14,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$mui$2b$material$40$7$2e$3$2e$5_$40$emotion$2b$react$40$11$2e$14$2e$0_$40$types$2b$react$40$18$2e$3$2e$27_react$40$19$2e$1$2e$0_$5f40$emotion$2b$styled_exfc7eucjbfe7sy7vftklwa4n4$2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Box$2f$Box$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -458,18 +523,20 @@ function Home() {
                                 children: "Dedicated to crafting beautiful and functional websites that make ideas come alive through code. Explore my portfolio to see my passion for web development in action."
                             }, void 0, false, {
                                 fileName: "[project]/pages/index.js",
-                                lineNumber: 25,
+                                lineNumber: 26,
                                 columnNumber: 11
                             }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Skills$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Skills$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                items: skills
+                            }, void 0, false, {
                                 fileName: "[project]/pages/index.js",
-                                lineNumber: 30,
+                                lineNumber: 31,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/pages/index.js",
-                        lineNumber: 24,
+                        lineNumber: 25,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$mui$2b$material$40$7$2e$3$2e$5_$40$emotion$2b$react$40$11$2e$14$2e$0_$40$types$2b$react$40$18$2e$3$2e$27_react$40$19$2e$1$2e$0_$5f40$emotion$2b$styled_exfc7eucjbfe7sy7vftklwa4n4$2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Box$2f$Box$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -482,23 +549,47 @@ function Home() {
                         }
                     }, void 0, false, {
                         fileName: "[project]/pages/index.js",
-                        lineNumber: 32,
+                        lineNumber: 33,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/pages/index.js",
-                lineNumber: 15,
+                lineNumber: 16,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/pages/index.js",
-        lineNumber: 11,
+        lineNumber: 12,
         columnNumber: 5
     }, this);
 }
-}),
+async function getStaticProps() {
+    try {
+        const items = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$contentful$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["getSkills"])();
+        // Map to keep payload small
+        const skills = items.map((it)=>({
+                sys: it.sys,
+                fields: it.fields
+            }));
+        return {
+            props: {
+                skills
+            },
+            revalidate: 60
+        };
+    } catch (err) {
+        console.error("Error fetching skills", err);
+        return {
+            props: {
+                skills: []
+            }
+        };
+    }
+}
+__turbopack_async_result__();
+} catch(e) { __turbopack_async_result__(e); } }, false);}),
 "[externals]/next/dist/shared/lib/no-fallback-error.external.js [external] (next/dist/shared/lib/no-fallback-error.external.js, cjs)", ((__turbopack_context__, module, exports) => {
 
 const mod = __turbopack_context__.x("next/dist/shared/lib/no-fallback-error.external.js", () => require("next/dist/shared/lib/no-fallback-error.external.js"));
@@ -507,4 +598,4 @@ module.exports = mod;
 }),
 ];
 
-//# sourceMappingURL=%5Broot-of-the-server%5D__e0cc1cdf._.js.map
+//# sourceMappingURL=%5Broot-of-the-server%5D__75ce2f1d._.js.map
