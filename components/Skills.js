@@ -19,15 +19,37 @@ const DEFAULT_SKILLS = [
 ];
 
 function parseSkill(s) {
-  const parts = s.split("-").map((p) => p.trim());
-  return {
-    name: parts[0],
-    rating: Math.min(10, Math.max(0, Number(parts[1] || 0))),
-  };
+  // Defensive parsing for both formats
+  try {
+    if (!s) return { name: "Unknown", rating: 0 };
+    if (typeof s === "string") {
+      const parts = s.split("-").map((p) => p.trim());
+      return {
+        name: parts[0],
+        rating: Math.min(10, Math.max(0, Number(parts[1] || 0))),
+      };
+    }
+    // Contentful object with fields.name and fields.rating
+    const fields = s.fields || {};
+    return {
+      name: fields.name || "Unknown",
+      rating: Math.min(10, Math.max(0, Number(fields.rating || 0))),
+    };
+  } catch (err) {
+    console.error("Error parsing skill:", s, err);
+    return { name: "Unknown", rating: 0 };
+  }
 }
 
 export default function Skills({ items = DEFAULT_SKILLS }) {
-  const parsed = items.map(parseSkill);
+  // Filter out null/undefined/empty objects before mapping
+  const parsed = (items || [])
+    .filter(
+      (s) =>
+        s &&
+        (typeof s === "string" || (s.fields && typeof s.fields === "object"))
+    )
+    .map(parseSkill);
 
   return (
     <Box sx={{ maxWidth: 900, mt: 4 }}>

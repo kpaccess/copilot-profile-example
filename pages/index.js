@@ -5,13 +5,34 @@ import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Skills from "../components/Skills";
 import Box from "@mui/material/Box";
+import { getSkills } from "../lib/contentful";
 
-export default function Home() {
+export default function Home({ skills }) {
+  // Debug: log skills prop to browser console
+  React.useEffect(() => {
+    // Only runs client-side
+    console.log("Skills prop:", skills);
+  }, [skills]);
+
+  // SSR blank page protection: fallback UI
+  if (!skills || !Array.isArray(skills) || skills.length === 0) {
+    return (
+      <Container maxWidth="lg">
+        <Header />
+        <Hero />
+        <Box sx={{ mt: 6 }}>
+          <Typography color="error" variant="h6">
+            No skills found. Please check your Contentful data or configuration.
+          </Typography>
+        </Box>
+      </Container>
+    );
+  }
+
   return (
     <Container maxWidth="lg">
       <Header />
       <Hero />
-
       <Box
         sx={{
           display: "flex",
@@ -27,7 +48,7 @@ export default function Home() {
             ideas come alive through code. Explore my portfolio to see my
             passion for web development in action.
           </Typography>
-          <Skills />
+          <Skills items={skills} />
         </Box>
         <Box sx={{ flex: "0 0 320px", display: { xs: "none", md: "block" } }}>
           {/* Placeholder for future side content (projects highlight, contact callout) */}
@@ -35,4 +56,38 @@ export default function Home() {
       </Box>
     </Container>
   );
+}
+
+export async function getStaticProps() {
+  const DEFAULT_SKILLS = [
+    "HTML - 8",
+    "CSS - 8",
+    "JavaScript - 8",
+    "ReactJS - 8",
+    "NextJS - 8",
+    "TypeScript - 8",
+    "Redux - 8",
+    "GraphQL - 7",
+    "Docker - 6",
+    "NODEJS - 5",
+  ];
+
+  try {
+    const items = await getSkills();
+    // Defensive: ensure items is an array
+    if (!Array.isArray(items) || items.length === 0) {
+      return { props: { skills: DEFAULT_SKILLS }, revalidate: 60 };
+    }
+    // Defensive: filter out invalid entries
+    const skills = items
+      .filter((it) => it && typeof it === "object" && it.fields)
+      .map((it) => ({ sys: it.sys, fields: it.fields }));
+    if (skills.length === 0) {
+      return { props: { skills: DEFAULT_SKILLS }, revalidate: 60 };
+    }
+    return { props: { skills }, revalidate: 60 };
+  } catch (err) {
+    console.error("Error fetching skills", err);
+    return { props: { skills: DEFAULT_SKILLS } };
+  }
 }
